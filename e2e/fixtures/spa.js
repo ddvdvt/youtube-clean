@@ -12,6 +12,13 @@
     window.dispatchEvent(new CustomEvent('yt-navigate-finish'));
   }
   window.__spaNavigate = navigate;
+  // like the real app, which also fires yt-navigate-finish after the first page load
+  setTimeout(() => window.dispatchEvent(new CustomEvent('yt-navigate-finish')), 300);
+  // like the real player, which restores its saved autoplay state while it initialises
+  setTimeout(() => {
+    const t = document.querySelector('.ytp-autonav-toggle-button');
+    if (t) t.setAttribute('aria-checked', 'true');
+  }, 1200);
   document.addEventListener('click', (e) => {
     const toggle = e.target.closest && e.target.closest('.ytp-autonav-toggle-button');
     if (toggle) {

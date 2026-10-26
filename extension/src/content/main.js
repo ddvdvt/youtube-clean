@@ -14,7 +14,8 @@ import { addUsage, shouldRemind, minutesOf } from '../../lib/usage.js';
 
 const STYLE_ID = 'yc-declutter-style';
 const TOAST_ID = 'yc-declutter-toast';
-const HEALTH_DELAY_MS = 5000;
+const HEALTH_DELAYS_MS = [5000, 15000, 30000]; // a probe that misses is retried before it counts
+const AUTOPLAY_WATCH_MS = 20000;
 const USAGE_TICK_S = 30;
 
 /** @param {string} key @param {string | string[]} [subs] */
@@ -47,6 +48,8 @@ const S = {
   focusActive: false,
   lastUrl: '',
   autoplayDoneFor: '',
+  lastUserClick: 0,
+  /** @type {Element | null} */ lastUserTarget: null,
   /** @type {any} */ autoplayTimer: 0,
   /** @type {any} */ healthTimer: 0,
   /** @type {any} */ scheduleTimer: 0,
@@ -129,48 +132,80 @@ function maybeRedirect(url) {
   return true;
 }
 
-/** Turn the autoplay toggle off once per video (the user may switch it back on). */
+/**
+ * Turn the autoplay toggle off for each new video. The player may still be initialising and flip
+ * it back on, so for AUTOPLAY_WATCH_MS the toggle is watched and switched off again — unless the
+ * user clicked it themselves (a real click just before the flip), which is always respected.
+ */
 function autoplay() {
-  clearInterval(S.autoplayTimer);
   const rule = S.config && S.config.rules && S.config.rules.autoplayOff;
   const vid = videoId(location.href);
-  if (!S.features.autoplayOff || !vid || S.autoplayDoneFor === vid || !rule || !isSafeSelector(rule.click)) return;
-  let tries = 0;
+  if (S.autoplayDoneFor === vid) return; // already handled (or being handled) for this video
+  clearInterval(S.autoplayTimer);
+  if (!S.features.autoplayOff || !vid || !rule || !isSafeSelector(rule.click)) return;
+  S.autoplayDoneFor = vid;
+  const started = Date.now();
+  let lastClick = 0;
   S.autoplayTimer = setInterval(() => {
     safe(() => {
-      if (!S.features.autoplayOff || videoId(location.href) !== vid || ++tries > 40) {
+      if (!S.features.autoplayOff || videoId(location.href) !== vid || Date.now() - started > AUTOPLAY_WATCH_MS) {
         clearInterval(S.autoplayTimer);
         return;
       }
       const btn = /** @type {HTMLElement | undefined} */ (activeAll(rule.click)[0]);
-      if (btn) {
-        btn.click();
-        S.autoplayDoneFor = vid;
-        clearInterval(S.autoplayTimer);
+      if (!btn) return;
+      const t = S.lastUserTarget;
+      const userToggled = t && t.isConnected && (btn.contains(t) || t.contains(btn));
+      if (userToggled && S.lastUserClick > lastClick && Date.now() - S.lastUserClick < 2000) {
+        clearInterval(S.autoplayTimer); // the user turned it on: leave it
+        return;
       }
+      // a player that is still starting ignores clicks: try again after a pause
+      if (Date.now() - lastClick < 1500) return;
+      btn.click();
+      lastClick = Date.now();
     });
-  }, 500);
+  }, 250);
 }
 
-/** Record whether each probed rule still finds its target on this page type. */
-async function checkHealth(page) {
+/**
+ * Record whether each probed rule still finds its target on this page type. Parts of the page
+ * load lazily, so a miss is only recorded after the last retry; a hit is recorded at once.
+ * @param {string} page
+ * @param {string} url
+ * @param {number} attempt index into HEALTH_DELAYS_MS
+ */
+async function checkHealth(page, url, attempt) {
+  if (location.href !== url) return;
   const probes = probesFor(S.config, page);
   if (!probes.length) return;
   const now = Date.now();
+  const last = attempt >= HEALTH_DELAYS_MS.length - 1;
   const { health: raw } = await chrome.storage.local.get('health');
   let health = normalizeHealth(raw, S.config.version);
-  let changed = raw === undefined || (raw && raw.configVersion !== S.config.version);
+  let changed = false;
+  let retry = false;
   /** @type {Map<string, typeof probes>} */
   const byFeature = new Map();
   for (const p of probes) byFeature.set(p.feature, [...(byFeature.get(p.feature) || []), p]);
   for (const [feature, list] of byFeature) {
     const applicable = list.filter((p) => !p.when || activeExists(p.when));
     const key = healthKey(feature, page);
-    if (!applicable.length || !shouldCheck(health, key, now)) continue;
-    health = recordCheck(health, key, applicable.some((p) => activeExists(p.selector)), now);
+    if (!shouldCheck(health, key, now)) continue;
+    if (!applicable.length) {
+      retry = retry || !last;
+      continue;
+    }
+    const matched = applicable.some((p) => activeExists(p.selector));
+    if (!matched && !last) {
+      retry = true;
+      continue;
+    }
+    health = recordCheck(health, key, matched, now);
     changed = true;
   }
   if (changed) await chrome.storage.local.set({ health });
+  if (retry) S.healthTimer = setTimeout(() => safe(() => checkHealth(page, url, attempt + 1)), HEALTH_DELAYS_MS[attempt + 1] - HEALTH_DELAYS_MS[attempt]);
 }
 
 function onPage() {
@@ -181,7 +216,7 @@ function onPage() {
   const page = pageType(url);
   if (page === 'watch') autoplay();
   clearTimeout(S.healthTimer);
-  S.healthTimer = setTimeout(() => safe(() => location.href === url && checkHealth(page)), HEALTH_DELAY_MS);
+  S.healthTimer = setTimeout(() => safe(() => checkHealth(page, url, 0)), HEALTH_DELAYS_MS[0]);
 }
 
 /** Counts for the popup: how many elements the stylesheet hides on the visible page. */
@@ -255,6 +290,10 @@ export async function start() {
     'click',
     (e) =>
       safe(() => {
+        if (e.isTrusted) {
+          S.lastUserClick = Date.now();
+          S.lastUserTarget = e.target instanceof Element ? e.target : null;
+        }
         if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
         const a = e.target instanceof Element ? e.target.closest('a[href]') : null;
         const href = a && /** @type {HTMLAnchorElement} */ (a).href;

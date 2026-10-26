@@ -219,6 +219,8 @@ try {
     await waitHidden(page, '[data-t="related"]');
     for (const s of ['endscreen', 'ce-1', 'ce-2', 'cards-teaser', 'fs-grid']) assert.ok(await isHidden(page, `[data-t="${s}"]`), s);
     await page.waitForFunction(() => document.querySelector('[data-t="autonav"]').getAttribute('aria-checked') === 'false', null, { timeout: 5000 });
+    await page.waitForTimeout(2500); // past the fixture player's own init, which turns autoplay back on
+    assert.equal(await page.getAttribute('[data-t="autonav"]', 'aria-checked'), 'false', 'still off after player init');
     assert.ok(await page.isVisible('[data-t="comments"]'), 'comments stay by default');
     assert.ok(await page.isVisible('.html5-video-player'), 'the player itself is never hidden');
   });
@@ -419,6 +421,9 @@ try {
     await page.bringToFront();
     await page.goto(`${O}/watch?v=v3ccccccccc`);
     await settled(page);
+    // the fixture player turns autoplay back on 1.2 s after load; the extension switches it off again
+    await page.waitForTimeout(2500);
+    assert.equal(await page.getAttribute('[data-t="autonav"]', 'aria-checked'), 'false', 'autoplay re-disabled after player init');
     await page.waitForSelector('#yc-declutter-toast', { state: 'attached', timeout: 40000 });
     const text = await page.evaluate(() => document.getElementById('yc-declutter-toast').shadowRoot.textContent);
     assert.match(text, /Сегодня вы уже 5 мин на YouTube/);
