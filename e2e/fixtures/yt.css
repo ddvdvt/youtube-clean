@@ -24,7 +24,9 @@ tp-yt-app-drawer { width: 230px; flex: none; padding: 12px; }
 ytd-guide-section-renderer { padding: 8px 0; border-bottom: 1px solid #e5e5e5; }
 .gh { margin: 4px 12px 6px; font-size: 16px; }
 ytd-guide-entry-renderer a { display: flex; gap: 22px; align-items: center; height: 40px; padding: 0 12px; border-radius: 10px; }
-ytd-guide-entry-renderer:first-child a { background: #f2f2f2; font-weight: 600; }
+ytd-guide-section-renderer:first-child ytd-guide-entry-renderer:first-child a { background: #f2f2f2; font-weight: 600; }
+/* like the real site, the watch page has no permanent menu column */
+body:has(ytd-watch-flexy:not([hidden])) tp-yt-app-drawer { display: none; }
 .ico { width: 24px; text-align: center; font-size: 17px; color: #444; }
 ytd-page-manager { flex: 1; min-width: 0; padding: 0 24px 40px; }
 ytd-watch-flexy[hidden], [hidden] { display: none !important; }
