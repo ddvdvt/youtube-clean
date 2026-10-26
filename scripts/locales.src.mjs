@@ -55,6 +55,12 @@ const M = {
   hiddenHere: ['Скрыто на этой странице: $1', 'Hidden on this page: $1'],
   notYoutube: ['Откройте YouTube — настройки применятся сразу, перезагрузка не нужна.', 'Open YouTube — settings apply instantly, no reload needed.'],
   reloadHint: ['Обновите вкладку YouTube, чтобы расширение начало работать на ней.', 'Reload the YouTube tab to start the extension there.'],
+  noAccess: [
+    'У расширения нет доступа к youtube.com (в Firefox его можно выдать или отозвать). Без доступа YouTube показывается как есть.',
+    'The extension has no access to youtube.com (in Firefox this access can be granted or revoked). Without it YouTube is shown as is.',
+  ],
+  grantAccess: ['Разрешить доступ к YouTube', 'Allow access to YouTube'],
+  accessDenied: ['Доступ не выдан.', 'Access was not granted.'],
   quickToggles: ['Быстрые переключатели', 'Quick toggles'],
   allSettings: ['Все настройки', 'All settings'],
   otherExtensions: ['Другие расширения автора', 'More extensions by the author'],
