@@ -1,0 +1,132 @@
+// Source of truth for extension/_locales/*/messages.json. Run: node scripts/locales.src.mjs
+import { writeFileSync, mkdirSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+/** key: [ru, en] */
+const M = {
+  extName: ['Видео без мусора — без Shorts и рекомендаций', 'Video Declutter — no Shorts, no recommendations'],
+  extShortName: ['Без мусора', 'Declutter'],
+  extDescription: [
+    'Скрывает Shorts, рекомендации, автовоспроизведение и лишние блоки на YouTube. Фокус по расписанию. Без аккаунта и слежки.',
+    'Hides Shorts, recommendations, autoplay and clutter on YouTube. Scheduled focus mode. No account, no tracking.',
+  ],
+  actionTitle: ['Видео без мусора', 'Video Declutter'],
+
+  feat_shorts: ['Скрыть Shorts', 'Hide Shorts'],
+  featDesc_shorts: ['Полки, пункт в меню, вкладка канала, ролики в поиске и подписках', 'Shelves, menu entry, channel tab, Shorts in search and subscriptions'],
+  feat_shortsRedirect: ['Открывать Shorts в обычном плеере', 'Open Shorts in the normal player'],
+  featDesc_shortsRedirect: ['/shorts/… → /watch?v=…: без бесконечной ленты', '/shorts/… → /watch?v=…: no endless feed'],
+  feat_homeFeed: ['Убрать рекомендации с главной', 'Hide home page recommendations'],
+  featDesc_homeFeed: ['Вместо ленты — спокойная пустая страница', 'A calm empty page instead of the feed'],
+  feat_homeRedirect: ['Главная → Подписки', 'Home → Subscriptions'],
+  featDesc_homeRedirect: ['Логотип и «Главная» открывают ваши подписки', 'The logo and Home open your subscriptions'],
+  feat_related: ['Скрыть «Следующее» справа от видео', 'Hide "Up next" next to the video'],
+  featDesc_related: ['Колонка рекомендаций на странице просмотра; плейлист остаётся', 'Recommendation column on the watch page; playlists stay'],
+  feat_endscreen: ['Скрыть конечные заставки и подсказки', 'Hide end screens and cards'],
+  featDesc_endscreen: ['Карточки поверх видео, стена роликов в конце, сетка в полноэкранном режиме', 'Cards over the video, the end video wall, the fullscreen grid'],
+  feat_autoplayOff: ['Выключать автовоспроизведение', 'Turn autoplay off'],
+  featDesc_autoplayOff: ['Следующее видео не запустится само', 'The next video will not start by itself'],
+  feat_comments: ['Скрыть комментарии', 'Hide comments'],
+  featDesc_comments: ['Под видео', 'Below videos'],
+  feat_liveChat: ['Скрыть чат трансляций', 'Hide live chat'],
+  featDesc_liveChat: ['Чат справа на трансляциях и премьерах', 'Chat next to live streams and premieres'],
+  feat_explore: ['Скрыть «Навигатор» и «В тренде»', 'Hide Explore and Trending'],
+  featDesc_explore: ['Раздел меню с музыкой, играми, трендами', 'The menu section with music, gaming, trending'],
+  feat_playables: ['Скрыть игры (Playables)', 'Hide games (Playables)'],
+  featDesc_playables: ['Пункт меню и полки с играми', 'Menu entry and game shelves'],
+  feat_ads: ['Скрыть рекламные места в интерфейсе', 'Hide ad slots in the interface'],
+  featDesc_ads: ['Только оформление: баннеры, промо в ленте и поиске. Сетевые запросы не блокируются', 'Cosmetic only: banners, promoted items in feeds and search. No requests are blocked'],
+
+  preset_minimal: ['Минимум', 'Minimal'],
+  presetDesc_minimal: ['Без Shorts и мусора, рекомендации остаются', 'No Shorts or clutter; recommendations stay'],
+  preset_focus: ['Фокус', 'Focus'],
+  presetDesc_focus: ['Без Shorts, рекомендаций и автовоспроизведения', 'No Shorts, recommendations or autoplay'],
+  preset_subscriptions: ['Только подписки', 'Subscriptions only'],
+  presetDesc_subscriptions: ['Как «Фокус», а главная открывает подписки', 'Like Focus, and home opens subscriptions'],
+  presetCustom: ['Свой набор', 'Custom'],
+  presetsLabel: ['Режим', 'Mode'],
+
+  enabledLabel: ['Включено', 'On'],
+  pausedNote: ['Расширение на паузе — YouTube показывается как есть.', 'Paused — YouTube is shown as is.'],
+  focusNow: ['Фокус по расписанию до $1', 'Scheduled focus until $1'],
+  focusNext: ['Фокус по расписанию с $1', 'Scheduled focus from $1'],
+  todayUsage: ['Сегодня на YouTube: $1 мин', 'Today on YouTube: $1 min'],
+  hiddenHere: ['Скрыто на этой странице: $1', 'Hidden on this page: $1'],
+  notYoutube: ['Откройте YouTube — настройки применятся сразу, перезагрузка не нужна.', 'Open YouTube — settings apply instantly, no reload needed.'],
+  reloadHint: ['Обновите вкладку YouTube, чтобы расширение начало работать на ней.', 'Reload the YouTube tab to start the extension there.'],
+  quickToggles: ['Быстрые переключатели', 'Quick toggles'],
+  allSettings: ['Все настройки', 'All settings'],
+  otherExtensions: ['Другие расширения автора', 'More extensions by the author'],
+  localOnly: ['Всё хранится только у вас', 'Everything stays on this device'],
+
+  staleTitle: ['Возможно, YouTube изменил разметку', 'YouTube may have changed its markup'],
+  staleText: ['Давно не срабатывает: $1. Обновите правила или дождитесь новой версии расширения.', 'Not matching for a while: $1. Update the rules or wait for a new extension version.'],
+  staleEnableRemote: ['Включить обновление правил', 'Turn on rule updates'],
+  checkNow: ['Проверить сейчас', 'Check now'],
+  checking: ['Проверяю…', 'Checking…'],
+
+  optionsTitle: ['Настройки — Видео без мусора', 'Settings — Video Declutter'],
+  optionsLead: ['Каждый пункт работает отдельно и применяется к открытым вкладкам сразу.', 'Every item works on its own and applies to open tabs instantly.'],
+  sectionPresets: ['Готовые режимы', 'Presets'],
+  presetsNote: ['Режим переключает все пункты, кроме комментариев и чата — их вы выбираете сами.', 'A preset switches every item except comments and chat, which stay your choice.'],
+  sectionHide: ['Что скрывать', 'What to hide'],
+  groupShorts: ['Shorts', 'Shorts'],
+  groupRecs: ['Рекомендации и автовоспроизведение', 'Recommendations and autoplay'],
+  groupOther: ['Остальное', 'Everything else'],
+  sectionSchedule: ['Фокус по расписанию', 'Focus schedule'],
+  scheduleOn: ['Включать «Фокус» в выбранные часы', 'Turn on Focus during these hours'],
+  scheduleNote: ['В эти часы к вашим настройкам добавляется режим «Фокус». Он только скрывает больше и ничего не возвращает. Интервал может переходить через полночь.', 'During these hours the Focus preset is added on top of your settings. It only hides more. The window may cross midnight.'],
+  scheduleFrom: ['С', 'From'],
+  scheduleTo: ['до', 'to'],
+  scheduleDays: ['Дни', 'Days'],
+  scheduleStatusOn: ['Сейчас идёт фокус.', 'Focus is on now.'],
+  scheduleStatusOff: ['Сейчас фокус не действует.', 'Focus is not active now.'],
+  scheduleNoDays: ['Выберите хотя бы один день.', 'Pick at least one day.'],
+  day0: ['Вс', 'Sun'],
+  day1: ['Пн', 'Mon'],
+  day2: ['Вт', 'Tue'],
+  day3: ['Ср', 'Wed'],
+  day4: ['Чт', 'Thu'],
+  day5: ['Пт', 'Fri'],
+  day6: ['Сб', 'Sat'],
+  sectionReminder: ['Напоминание о времени', 'Time reminder'],
+  reminderOn: ['Напоминать, когда за день набежит', 'Remind me after a daily total of'],
+  reminderMinutes: ['минут', 'minutes'],
+  reminderNote: ['Считается только время, когда вкладка YouTube открыта и активна. Счётчик хранится на этом устройстве и сбрасывается в полночь.', 'Only time while a YouTube tab is visible and focused counts. The counter stays on this device and resets at midnight.'],
+  reminderToast: ['Сегодня вы уже $1 мин на YouTube. Может, пора сделать перерыв?', 'You have spent $1 min on YouTube today. Time for a break?'],
+  reminderClose: ['Понятно', 'Got it'],
+  sectionRules: ['Правила распознавания', 'Detection rules'],
+  rulesNote: ['YouTube часто меняет вёрстку. Все селекторы лежат в одном файле данных; он проверяется по схеме. Если правило долго ничего не находит, в попапе появится предупреждение.', 'YouTube changes its markup often. All selectors live in one data file validated against a schema. If a rule finds nothing for a while, the popup shows a warning.'],
+  rulesBundled: ['Встроенные правила: версия $1 от $2', 'Bundled rules: version $1, $2'],
+  rulesActive: ['Используются: версия $1', 'In use: version $1'],
+  remoteOn: ['Обновлять правила с сайта автора', 'Update rules from the author’s site'],
+  remoteNote: ['Раз в сутки скачивается один JSON-файл с селекторами (только данные, не код), подписанный ключом автора. Без cookies и без ваших данных. Если подпись или формат не сходятся, остаются встроенные правила. По умолчанию выключено.', 'Once a day one JSON file with selectors (data only, never code), signed by the author’s key, is downloaded. No cookies, none of your data. If the signature or format is wrong, the bundled rules stay. Off by default.'],
+  remoteStatusOk: ['Проверено $1: версия $2', 'Checked $1: version $2'],
+  remoteStatusErr: ['Проверка $1 не удалась: $2', 'Check $1 failed: $2'],
+  remoteNever: ['Ещё не проверялось.', 'Not checked yet.'],
+  sectionHealth: ['Состояние правил', 'Rule status'],
+  healthOk: ['работает', 'works'],
+  healthStale: ['давно не находит', 'not found for a while'],
+  healthUnknown: ['ещё не проверялось', 'not checked yet'],
+  healthLastHit: ['последний раз: $1', 'last seen: $1'],
+  healthNote: ['Проверяется сама разметка на страницах, которые вы открываете, не чаще раза в 10 минут. Ничего не отправляется.', 'Checks the markup of pages you open, at most once per 10 minutes. Nothing is sent anywhere.'],
+  sectionAbout: ['О расширении', 'About'],
+  aboutText: ['Бесплатно, без аккаунта, без рекламы и аналитики. Расширение не блокирует сетевые запросы и не скачивает видео — оно только скрывает части страницы.', 'Free, no account, no ads, no analytics. The extension never blocks network requests or downloads videos — it only hides parts of the page.'],
+  notIncluded: ['Не входит в эту версию: возврат оригинальных названий и звука вместо автоперевода. Это требует запросов к серверам YouTube, а расширение работает без сети.', 'Not in this version: restoring original titles and audio instead of auto-translation. That needs requests to YouTube servers, and this extension works offline.'],
+  resetAll: ['Сбросить настройки', 'Reset settings'],
+  resetDone: ['Настройки сброшены.', 'Settings reset.'],
+  saved: ['Сохранено', 'Saved'],
+  homeMessage: ['Рекомендации на главной скрыты.\nПоиск, подписки и плейлисты работают как обычно.', 'Home recommendations are hidden.\nSearch, subscriptions and playlists work as usual.'],
+};
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', 'extension', '_locales');
+['ru', 'en'].forEach((lang, i) => {
+  const out = {};
+  for (const [k, v] of Object.entries(M)) {
+    out[k] = { message: v[i] }; // $1, $2 are plain chrome.i18n substitutions
+  }
+  mkdirSync(join(ROOT, lang), { recursive: true });
+  writeFileSync(join(ROOT, lang, 'messages.json'), JSON.stringify(out, null, 2) + '\n');
+});
+console.log(`${Object.keys(M).length} messages × 2 locales`);

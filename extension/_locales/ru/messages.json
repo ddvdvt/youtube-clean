@@ -1,0 +1,317 @@
+{
+  "extName": {
+    "message": "Видео без мусора — без Shorts и рекомендаций"
+  },
+  "extShortName": {
+    "message": "Без мусора"
+  },
+  "extDescription": {
+    "message": "Скрывает Shorts, рекомендации, автовоспроизведение и лишние блоки на YouTube. Фокус по расписанию. Без аккаунта и слежки."
+  },
+  "actionTitle": {
+    "message": "Видео без мусора"
+  },
+  "feat_shorts": {
+    "message": "Скрыть Shorts"
+  },
+  "featDesc_shorts": {
+    "message": "Полки, пункт в меню, вкладка канала, ролики в поиске и подписках"
+  },
+  "feat_shortsRedirect": {
+    "message": "Открывать Shorts в обычном плеере"
+  },
+  "featDesc_shortsRedirect": {
+    "message": "/shorts/… → /watch?v=…: без бесконечной ленты"
+  },
+  "feat_homeFeed": {
+    "message": "Убрать рекомендации с главной"
+  },
+  "featDesc_homeFeed": {
+    "message": "Вместо ленты — спокойная пустая страница"
+  },
+  "feat_homeRedirect": {
+    "message": "Главная → Подписки"
+  },
+  "featDesc_homeRedirect": {
+    "message": "Логотип и «Главная» открывают ваши подписки"
+  },
+  "feat_related": {
+    "message": "Скрыть «Следующее» справа от видео"
+  },
+  "featDesc_related": {
+    "message": "Колонка рекомендаций на странице просмотра; плейлист остаётся"
+  },
+  "feat_endscreen": {
+    "message": "Скрыть конечные заставки и подсказки"
+  },
+  "featDesc_endscreen": {
+    "message": "Карточки поверх видео, стена роликов в конце, сетка в полноэкранном режиме"
+  },
+  "feat_autoplayOff": {
+    "message": "Выключать автовоспроизведение"
+  },
+  "featDesc_autoplayOff": {
+    "message": "Следующее видео не запустится само"
+  },
+  "feat_comments": {
+    "message": "Скрыть комментарии"
+  },
+  "featDesc_comments": {
+    "message": "Под видео"
+  },
+  "feat_liveChat": {
+    "message": "Скрыть чат трансляций"
+  },
+  "featDesc_liveChat": {
+    "message": "Чат справа на трансляциях и премьерах"
+  },
+  "feat_explore": {
+    "message": "Скрыть «Навигатор» и «В тренде»"
+  },
+  "featDesc_explore": {
+    "message": "Раздел меню с музыкой, играми, трендами"
+  },
+  "feat_playables": {
+    "message": "Скрыть игры (Playables)"
+  },
+  "featDesc_playables": {
+    "message": "Пункт меню и полки с играми"
+  },
+  "feat_ads": {
+    "message": "Скрыть рекламные места в интерфейсе"
+  },
+  "featDesc_ads": {
+    "message": "Только оформление: баннеры, промо в ленте и поиске. Сетевые запросы не блокируются"
+  },
+  "preset_minimal": {
+    "message": "Минимум"
+  },
+  "presetDesc_minimal": {
+    "message": "Без Shorts и мусора, рекомендации остаются"
+  },
+  "preset_focus": {
+    "message": "Фокус"
+  },
+  "presetDesc_focus": {
+    "message": "Без Shorts, рекомендаций и автовоспроизведения"
+  },
+  "preset_subscriptions": {
+    "message": "Только подписки"
+  },
+  "presetDesc_subscriptions": {
+    "message": "Как «Фокус», а главная открывает подписки"
+  },
+  "presetCustom": {
+    "message": "Свой набор"
+  },
+  "presetsLabel": {
+    "message": "Режим"
+  },
+  "enabledLabel": {
+    "message": "Включено"
+  },
+  "pausedNote": {
+    "message": "Расширение на паузе — YouTube показывается как есть."
+  },
+  "focusNow": {
+    "message": "Фокус по расписанию до $1"
+  },
+  "focusNext": {
+    "message": "Фокус по расписанию с $1"
+  },
+  "todayUsage": {
+    "message": "Сегодня на YouTube: $1 мин"
+  },
+  "hiddenHere": {
+    "message": "Скрыто на этой странице: $1"
+  },
+  "notYoutube": {
+    "message": "Откройте YouTube — настройки применятся сразу, перезагрузка не нужна."
+  },
+  "reloadHint": {
+    "message": "Обновите вкладку YouTube, чтобы расширение начало работать на ней."
+  },
+  "quickToggles": {
+    "message": "Быстрые переключатели"
+  },
+  "allSettings": {
+    "message": "Все настройки"
+  },
+  "otherExtensions": {
+    "message": "Другие расширения автора"
+  },
+  "localOnly": {
+    "message": "Всё хранится только у вас"
+  },
+  "staleTitle": {
+    "message": "Возможно, YouTube изменил разметку"
+  },
+  "staleText": {
+    "message": "Давно не срабатывает: $1. Обновите правила или дождитесь новой версии расширения."
+  },
+  "staleEnableRemote": {
+    "message": "Включить обновление правил"
+  },
+  "checkNow": {
+    "message": "Проверить сейчас"
+  },
+  "checking": {
+    "message": "Проверяю…"
+  },
+  "optionsTitle": {
+    "message": "Настройки — Видео без мусора"
+  },
+  "optionsLead": {
+    "message": "Каждый пункт работает отдельно и применяется к открытым вкладкам сразу."
+  },
+  "sectionPresets": {
+    "message": "Готовые режимы"
+  },
+  "presetsNote": {
+    "message": "Режим переключает все пункты, кроме комментариев и чата — их вы выбираете сами."
+  },
+  "sectionHide": {
+    "message": "Что скрывать"
+  },
+  "groupShorts": {
+    "message": "Shorts"
+  },
+  "groupRecs": {
+    "message": "Рекомендации и автовоспроизведение"
+  },
+  "groupOther": {
+    "message": "Остальное"
+  },
+  "sectionSchedule": {
+    "message": "Фокус по расписанию"
+  },
+  "scheduleOn": {
+    "message": "Включать «Фокус» в выбранные часы"
+  },
+  "scheduleNote": {
+    "message": "В эти часы к вашим настройкам добавляется режим «Фокус». Он только скрывает больше и ничего не возвращает. Интервал может переходить через полночь."
+  },
+  "scheduleFrom": {
+    "message": "С"
+  },
+  "scheduleTo": {
+    "message": "до"
+  },
+  "scheduleDays": {
+    "message": "Дни"
+  },
+  "scheduleStatusOn": {
+    "message": "Сейчас идёт фокус."
+  },
+  "scheduleStatusOff": {
+    "message": "Сейчас фокус не действует."
+  },
+  "scheduleNoDays": {
+    "message": "Выберите хотя бы один день."
+  },
+  "day0": {
+    "message": "Вс"
+  },
+  "day1": {
+    "message": "Пн"
+  },
+  "day2": {
+    "message": "Вт"
+  },
+  "day3": {
+    "message": "Ср"
+  },
+  "day4": {
+    "message": "Чт"
+  },
+  "day5": {
+    "message": "Пт"
+  },
+  "day6": {
+    "message": "Сб"
+  },
+  "sectionReminder": {
+    "message": "Напоминание о времени"
+  },
+  "reminderOn": {
+    "message": "Напоминать, когда за день набежит"
+  },
+  "reminderMinutes": {
+    "message": "минут"
+  },
+  "reminderNote": {
+    "message": "Считается только время, когда вкладка YouTube открыта и активна. Счётчик хранится на этом устройстве и сбрасывается в полночь."
+  },
+  "reminderToast": {
+    "message": "Сегодня вы уже $1 мин на YouTube. Может, пора сделать перерыв?"
+  },
+  "reminderClose": {
+    "message": "Понятно"
+  },
+  "sectionRules": {
+    "message": "Правила распознавания"
+  },
+  "rulesNote": {
+    "message": "YouTube часто меняет вёрстку. Все селекторы лежат в одном файле данных; он проверяется по схеме. Если правило долго ничего не находит, в попапе появится предупреждение."
+  },
+  "rulesBundled": {
+    "message": "Встроенные правила: версия $1 от $2"
+  },
+  "rulesActive": {
+    "message": "Используются: версия $1"
+  },
+  "remoteOn": {
+    "message": "Обновлять правила с сайта автора"
+  },
+  "remoteNote": {
+    "message": "Раз в сутки скачивается один JSON-файл с селекторами (только данные, не код), подписанный ключом автора. Без cookies и без ваших данных. Если подпись или формат не сходятся, остаются встроенные правила. По умолчанию выключено."
+  },
+  "remoteStatusOk": {
+    "message": "Проверено $1: версия $2"
+  },
+  "remoteStatusErr": {
+    "message": "Проверка $1 не удалась: $2"
+  },
+  "remoteNever": {
+    "message": "Ещё не проверялось."
+  },
+  "sectionHealth": {
+    "message": "Состояние правил"
+  },
+  "healthOk": {
+    "message": "работает"
+  },
+  "healthStale": {
+    "message": "давно не находит"
+  },
+  "healthUnknown": {
+    "message": "ещё не проверялось"
+  },
+  "healthLastHit": {
+    "message": "последний раз: $1"
+  },
+  "healthNote": {
+    "message": "Проверяется сама разметка на страницах, которые вы открываете, не чаще раза в 10 минут. Ничего не отправляется."
+  },
+  "sectionAbout": {
+    "message": "О расширении"
+  },
+  "aboutText": {
+    "message": "Бесплатно, без аккаунта, без рекламы и аналитики. Расширение не блокирует сетевые запросы и не скачивает видео — оно только скрывает части страницы."
+  },
+  "notIncluded": {
+    "message": "Не входит в эту версию: возврат оригинальных названий и звука вместо автоперевода. Это требует запросов к серверам YouTube, а расширение работает без сети."
+  },
+  "resetAll": {
+    "message": "Сбросить настройки"
+  },
+  "resetDone": {
+    "message": "Настройки сброшены."
+  },
+  "saved": {
+    "message": "Сохранено"
+  },
+  "homeMessage": {
+    "message": "Рекомендации на главной скрыты.\nПоиск, подписки и плейлисты работают как обычно."
+  }
+}

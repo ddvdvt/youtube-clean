@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Настройки — Видео без мусора</title>
+  <link rel="stylesheet" href="../shared/ui.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="head">
+      <img src="../../icons/icon48.png" alt="" width="40" height="40">
+      <div>
+        <h1 data-i18n="optionsTitle">Настройки — Видео без мусора</h1>
+        <p class="muted" data-i18n="optionsLead">Каждый пункт работает отдельно и применяется к открытым вкладкам сразу.</p>
+      </div>
+      <label class="master" for="enabled">
+        <span data-i18n="enabledLabel">Включено</span>
+        <input type="checkbox" class="switch" id="enabled">
+      </label>
+    </header>
+
+    <section class="panel" aria-labelledby="hPresets">
+      <h2 id="hPresets" data-i18n="sectionPresets">Готовые режимы</h2>
+      <div id="presetCards" class="preset-cards" role="group" aria-labelledby="hPresets"></div>
+      <p class="muted small" data-i18n="presetsNote">Режим переключает все пункты, кроме комментариев и чата — их вы выбираете сами.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="hHide">
+      <h2 id="hHide" data-i18n="sectionHide">Что скрывать</h2>
+      <h3 data-i18n="groupShorts">Shorts</h3>
+      <div id="gShorts"></div>
+      <h3 data-i18n="groupRecs">Рекомендации и автовоспроизведение</h3>
+      <div id="gRecs"></div>
+      <h3 data-i18n="groupOther">Остальное</h3>
+      <div id="gOther"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="hSchedule" id="schedulePanel">
+      <h2 id="hSchedule" data-i18n="sectionSchedule">Фокус по расписанию</h2>
+      <label class="switch-row">
+        <span data-i18n="scheduleOn">Включать «Фокус» в выбранные часы</span>
+        <input type="checkbox" class="switch" id="scheduleEnabled">
+      </label>
+      <div class="row">
+        <label class="inline"><span data-i18n="scheduleFrom">С</span> <input type="time" id="scheduleFrom" required></label>
+        <label class="inline"><span data-i18n="scheduleTo">до</span> <input type="time" id="scheduleTo" required></label>
+      </div>
+      <fieldset class="days">
+        <legend data-i18n="scheduleDays">Дни</legend>
+        <div id="days"></div>
+      </fieldset>
+      <p id="scheduleStatus" class="small" aria-live="polite"></p>
+      <p class="muted small" data-i18n="scheduleNote">В эти часы к вашим настройкам добавляется режим «Фокус».</p>
+    </section>
+
+    <section class="panel" aria-labelledby="hReminder">
+      <h2 id="hReminder" data-i18n="sectionReminder">Напоминание о времени</h2>
+      <div class="row">
+        <label class="switch-row grow">
+          <span data-i18n="reminderOn">Напоминать, когда за день набежит</span>
+          <input type="checkbox" class="switch" id="reminderEnabled">
+        </label>
+        <label class="inline"><input type="number" id="reminderMinutes" min="5" max="1440" step="5" inputmode="numeric"> <span data-i18n="reminderMinutes">минут</span></label>
+      </div>
+      <p id="usageToday" class="small"></p>
+      <p class="muted small" data-i18n="reminderNote">Считается только время, когда вкладка YouTube открыта и активна.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="hRules" id="rulesPanel">
+      <h2 id="hRules" data-i18n="sectionRules">Правила распознавания</h2>
+      <p class="muted small" data-i18n="rulesNote">YouTube часто меняет вёрстку.</p>
+      <p class="small"><span id="rulesBundled"></span> · <span id="rulesActive"></span></p>
+      <label class="switch-row">
+        <span><span data-i18n="remoteOn">Обновлять правила с сайта автора</span><small data-i18n="remoteNote">Раз в сутки скачивается один JSON-файл с селекторами.</small></span>
+        <input type="checkbox" class="switch" id="remoteEnabled">
+      </label>
+      <div class="row">
+        <button type="button" class="btn small" id="checkNow" data-i18n="checkNow">Проверить сейчас</button>
+        <span id="remoteStatus" class="small muted" aria-live="polite"></span>
+      </div>
+      <h3 data-i18n="sectionHealth">Состояние правил</h3>
+      <ul id="health" class="health"></ul>
+      <p class="muted small" data-i18n="healthNote">Проверяется сама разметка на страницах, которые вы открываете.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="hAbout">
+      <h2 id="hAbout" data-i18n="sectionAbout">О расширении</h2>
+      <p class="small" data-i18n="aboutText">Бесплатно, без аккаунта, без рекламы и аналитики.</p>
+      <p class="small muted" data-i18n="notIncluded">Не входит в эту версию: возврат оригинальных названий и звука вместо автоперевода.</p>
+      <div class="row">
+        <button type="button" class="btn small danger" id="reset" data-i18n="resetAll">Сбросить настройки</button>
+        <span id="resetMsg" class="small muted" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span data-i18n="localOnly">Всё хранится только у вас</span>
+      <a href="#" data-brand-link="other" target="_blank" rel="noopener" data-i18n="otherExtensions">Другие расширения автора</a>
+    </footer>
+  </div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

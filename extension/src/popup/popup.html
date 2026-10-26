@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Видео без мусора</title>
+  <link rel="stylesheet" href="../shared/ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="../../icons/icon32.png" alt="" width="20" height="20">
+      <span data-i18n="actionTitle">Видео без мусора</span>
+    </div>
+    <label class="master" for="enabled">
+      <span data-i18n="enabledLabel">Включено</span>
+      <input type="checkbox" class="switch" id="enabled">
+    </label>
+  </header>
+
+  <main>
+    <p id="paused" class="note hidden" data-i18n="pausedNote">Расширение на паузе — YouTube показывается как есть.</p>
+
+    <section aria-labelledby="presetsLabel">
+      <h2 class="section-title" id="presetsLabel" data-i18n="presetsLabel">Режим</h2>
+      <div id="presets" class="presets" role="group" aria-labelledby="presetsLabel"></div>
+      <p id="presetDesc" class="muted preset-desc"></p>
+    </section>
+
+    <section id="status" class="card status" aria-live="polite">
+      <p id="tabStatus" class="muted" data-i18n="notYoutube">Откройте YouTube — настройки применятся сразу, перезагрузка не нужна.</p>
+      <p id="focusStatus" class="hidden"></p>
+      <p id="usageStatus" class="muted"></p>
+    </section>
+
+    <section id="stale" class="card warn hidden" role="alert">
+      <b data-i18n="staleTitle">Возможно, YouTube изменил разметку</b>
+      <p id="staleText"></p>
+      <button type="button" id="staleAction" class="btn small"></button>
+    </section>
+
+    <h2 class="section-title" data-i18n="quickToggles">Быстрые переключатели</h2>
+    <div id="switches"></div>
+  </main>
+
+  <footer class="footer">
+    <a href="#" id="allSettings" data-i18n="allSettings">Все настройки</a>
+    <a href="#" data-brand-link="other" target="_blank" rel="noopener" data-i18n="otherExtensions">Другие расширения автора</a>
+  </footer>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

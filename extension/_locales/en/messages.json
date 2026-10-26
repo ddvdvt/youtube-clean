@@ -1,0 +1,317 @@
+{
+  "extName": {
+    "message": "Video Declutter — no Shorts, no recommendations"
+  },
+  "extShortName": {
+    "message": "Declutter"
+  },
+  "extDescription": {
+    "message": "Hides Shorts, recommendations, autoplay and clutter on YouTube. Scheduled focus mode. No account, no tracking."
+  },
+  "actionTitle": {
+    "message": "Video Declutter"
+  },
+  "feat_shorts": {
+    "message": "Hide Shorts"
+  },
+  "featDesc_shorts": {
+    "message": "Shelves, menu entry, channel tab, Shorts in search and subscriptions"
+  },
+  "feat_shortsRedirect": {
+    "message": "Open Shorts in the normal player"
+  },
+  "featDesc_shortsRedirect": {
+    "message": "/shorts/… → /watch?v=…: no endless feed"
+  },
+  "feat_homeFeed": {
+    "message": "Hide home page recommendations"
+  },
+  "featDesc_homeFeed": {
+    "message": "A calm empty page instead of the feed"
+  },
+  "feat_homeRedirect": {
+    "message": "Home → Subscriptions"
+  },
+  "featDesc_homeRedirect": {
+    "message": "The logo and Home open your subscriptions"
+  },
+  "feat_related": {
+    "message": "Hide \"Up next\" next to the video"
+  },
+  "featDesc_related": {
+    "message": "Recommendation column on the watch page; playlists stay"
+  },
+  "feat_endscreen": {
+    "message": "Hide end screens and cards"
+  },
+  "featDesc_endscreen": {
+    "message": "Cards over the video, the end video wall, the fullscreen grid"
+  },
+  "feat_autoplayOff": {
+    "message": "Turn autoplay off"
+  },
+  "featDesc_autoplayOff": {
+    "message": "The next video will not start by itself"
+  },
+  "feat_comments": {
+    "message": "Hide comments"
+  },
+  "featDesc_comments": {
+    "message": "Below videos"
+  },
+  "feat_liveChat": {
+    "message": "Hide live chat"
+  },
+  "featDesc_liveChat": {
+    "message": "Chat next to live streams and premieres"
+  },
+  "feat_explore": {
+    "message": "Hide Explore and Trending"
+  },
+  "featDesc_explore": {
+    "message": "The menu section with music, gaming, trending"
+  },
+  "feat_playables": {
+    "message": "Hide games (Playables)"
+  },
+  "featDesc_playables": {
+    "message": "Menu entry and game shelves"
+  },
+  "feat_ads": {
+    "message": "Hide ad slots in the interface"
+  },
+  "featDesc_ads": {
+    "message": "Cosmetic only: banners, promoted items in feeds and search. No requests are blocked"
+  },
+  "preset_minimal": {
+    "message": "Minimal"
+  },
+  "presetDesc_minimal": {
+    "message": "No Shorts or clutter; recommendations stay"
+  },
+  "preset_focus": {
+    "message": "Focus"
+  },
+  "presetDesc_focus": {
+    "message": "No Shorts, recommendations or autoplay"
+  },
+  "preset_subscriptions": {
+    "message": "Subscriptions only"
+  },
+  "presetDesc_subscriptions": {
+    "message": "Like Focus, and home opens subscriptions"
+  },
+  "presetCustom": {
+    "message": "Custom"
+  },
+  "presetsLabel": {
+    "message": "Mode"
+  },
+  "enabledLabel": {
+    "message": "On"
+  },
+  "pausedNote": {
+    "message": "Paused — YouTube is shown as is."
+  },
+  "focusNow": {
+    "message": "Scheduled focus until $1"
+  },
+  "focusNext": {
+    "message": "Scheduled focus from $1"
+  },
+  "todayUsage": {
+    "message": "Today on YouTube: $1 min"
+  },
+  "hiddenHere": {
+    "message": "Hidden on this page: $1"
+  },
+  "notYoutube": {
+    "message": "Open YouTube — settings apply instantly, no reload needed."
+  },
+  "reloadHint": {
+    "message": "Reload the YouTube tab to start the extension there."
+  },
+  "quickToggles": {
+    "message": "Quick toggles"
+  },
+  "allSettings": {
+    "message": "All settings"
+  },
+  "otherExtensions": {
+    "message": "More extensions by the author"
+  },
+  "localOnly": {
+    "message": "Everything stays on this device"
+  },
+  "staleTitle": {
+    "message": "YouTube may have changed its markup"
+  },
+  "staleText": {
+    "message": "Not matching for a while: $1. Update the rules or wait for a new extension version."
+  },
+  "staleEnableRemote": {
+    "message": "Turn on rule updates"
+  },
+  "checkNow": {
+    "message": "Check now"
+  },
+  "checking": {
+    "message": "Checking…"
+  },
+  "optionsTitle": {
+    "message": "Settings — Video Declutter"
+  },
+  "optionsLead": {
+    "message": "Every item works on its own and applies to open tabs instantly."
+  },
+  "sectionPresets": {
+    "message": "Presets"
+  },
+  "presetsNote": {
+    "message": "A preset switches every item except comments and chat, which stay your choice."
+  },
+  "sectionHide": {
+    "message": "What to hide"
+  },
+  "groupShorts": {
+    "message": "Shorts"
+  },
+  "groupRecs": {
+    "message": "Recommendations and autoplay"
+  },
+  "groupOther": {
+    "message": "Everything else"
+  },
+  "sectionSchedule": {
+    "message": "Focus schedule"
+  },
+  "scheduleOn": {
+    "message": "Turn on Focus during these hours"
+  },
+  "scheduleNote": {
+    "message": "During these hours the Focus preset is added on top of your settings. It only hides more. The window may cross midnight."
+  },
+  "scheduleFrom": {
+    "message": "From"
+  },
+  "scheduleTo": {
+    "message": "to"
+  },
+  "scheduleDays": {
+    "message": "Days"
+  },
+  "scheduleStatusOn": {
+    "message": "Focus is on now."
+  },
+  "scheduleStatusOff": {
+    "message": "Focus is not active now."
+  },
+  "scheduleNoDays": {
+    "message": "Pick at least one day."
+  },
+  "day0": {
+    "message": "Sun"
+  },
+  "day1": {
+    "message": "Mon"
+  },
+  "day2": {
+    "message": "Tue"
+  },
+  "day3": {
+    "message": "Wed"
+  },
+  "day4": {
+    "message": "Thu"
+  },
+  "day5": {
+    "message": "Fri"
+  },
+  "day6": {
+    "message": "Sat"
+  },
+  "sectionReminder": {
+    "message": "Time reminder"
+  },
+  "reminderOn": {
+    "message": "Remind me after a daily total of"
+  },
+  "reminderMinutes": {
+    "message": "minutes"
+  },
+  "reminderNote": {
+    "message": "Only time while a YouTube tab is visible and focused counts. The counter stays on this device and resets at midnight."
+  },
+  "reminderToast": {
+    "message": "You have spent $1 min on YouTube today. Time for a break?"
+  },
+  "reminderClose": {
+    "message": "Got it"
+  },
+  "sectionRules": {
+    "message": "Detection rules"
+  },
+  "rulesNote": {
+    "message": "YouTube changes its markup often. All selectors live in one data file validated against a schema. If a rule finds nothing for a while, the popup shows a warning."
+  },
+  "rulesBundled": {
+    "message": "Bundled rules: version $1, $2"
+  },
+  "rulesActive": {
+    "message": "In use: version $1"
+  },
+  "remoteOn": {
+    "message": "Update rules from the author’s site"
+  },
+  "remoteNote": {
+    "message": "Once a day one JSON file with selectors (data only, never code), signed by the author’s key, is downloaded. No cookies, none of your data. If the signature or format is wrong, the bundled rules stay. Off by default."
+  },
+  "remoteStatusOk": {
+    "message": "Checked $1: version $2"
+  },
+  "remoteStatusErr": {
+    "message": "Check $1 failed: $2"
+  },
+  "remoteNever": {
+    "message": "Not checked yet."
+  },
+  "sectionHealth": {
+    "message": "Rule status"
+  },
+  "healthOk": {
+    "message": "works"
+  },
+  "healthStale": {
+    "message": "not found for a while"
+  },
+  "healthUnknown": {
+    "message": "not checked yet"
+  },
+  "healthLastHit": {
+    "message": "last seen: $1"
+  },
+  "healthNote": {
+    "message": "Checks the markup of pages you open, at most once per 10 minutes. Nothing is sent anywhere."
+  },
+  "sectionAbout": {
+    "message": "About"
+  },
+  "aboutText": {
+    "message": "Free, no account, no ads, no analytics. The extension never blocks network requests or downloads videos — it only hides parts of the page."
+  },
+  "notIncluded": {
+    "message": "Not in this version: restoring original titles and audio instead of auto-translation. That needs requests to YouTube servers, and this extension works offline."
+  },
+  "resetAll": {
+    "message": "Reset settings"
+  },
+  "resetDone": {
+    "message": "Settings reset."
+  },
+  "saved": {
+    "message": "Saved"
+  },
+  "homeMessage": {
+    "message": "Home recommendations are hidden.\nSearch, subscriptions and playlists work as usual."
+  }
+}
