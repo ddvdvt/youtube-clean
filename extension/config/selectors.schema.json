@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "youtube-clean/selectors.schema.json",
+  "title": "Video Declutter selector config",
+  "description": "Data-only description of page parts to hide. Validated at runtime by extension/lib/config.js (validateConfig), which is the source of truth; test/config.test.js keeps both in sync. Selectors must not contain braces, '<', '@', ';', backslash or newlines, 'url(' or '/*'.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "rules"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "comment": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1, "description": "A downloaded config is used only if its version is greater than the bundled one. Bump it on every change." },
+    "updated": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "inactive": { "$ref": "#/$defs/selectorList", "description": "Containers of pages YouTube keeps in the DOM but hides; probes and counters ignore elements inside them." },
+    "homeMessage": { "$ref": "#/$defs/selector", "description": "Element that shows the calm 'recommendations are hidden' text (as ::before) when the home feed is hidden." },
+    "rules": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shorts": { "$ref": "#/$defs/rule" },
+        "homeFeed": { "$ref": "#/$defs/rule" },
+        "related": { "$ref": "#/$defs/rule" },
+        "endscreen": { "$ref": "#/$defs/rule" },
+        "autoplayOff": { "$ref": "#/$defs/rule" },
+        "comments": { "$ref": "#/$defs/rule" },
+        "liveChat": { "$ref": "#/$defs/rule" },
+        "explore": { "$ref": "#/$defs/rule" },
+        "playables": { "$ref": "#/$defs/rule" },
+        "ads": { "$ref": "#/$defs/rule" }
+      }
+    }
+  },
+  "$defs": {
+    "selector": { "type": "string", "minLength": 1, "maxLength": 400, "pattern": "^[^{}<@;\\\\\\r\\n]+$" },
+    "selectorList": { "type": "array", "minItems": 1, "maxItems": 120, "items": { "$ref": "#/$defs/selector" } },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "anyOf": [{ "required": ["hide"] }, { "required": ["click"] }],
+      "properties": {
+        "hide": { "$ref": "#/$defs/selectorList", "description": "Each selector becomes `<selector> { display: none !important; }`." },
+        "click": { "$ref": "#/$defs/selector", "description": "Element clicked once per video (autoplay toggle while it is on)." },
+        "probes": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["page", "selector"],
+            "properties": {
+              "page": { "enum": ["home", "watch", "search", "channel", "subscriptions", "shorts", "other"] },
+              "selector": { "$ref": "#/$defs/selector", "description": "Should match on this page type while the markup is unchanged." },
+              "when": { "$ref": "#/$defs/selector", "description": "The check counts only if this matches (e.g. the sidebar is rendered)." }
+            }
+          }
+        }
+      }
+    }
+  }
+}

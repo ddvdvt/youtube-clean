@@ -1,0 +1,139 @@
+{
+  "$schema": "./selectors.schema.json",
+  "comment": "Data only, never code. One entry per feature. 'hide' selectors become display:none rules; 'probes' tell the extension what should exist on a page type while the markup is unchanged (used for the 'YouTube may have changed its markup' warning). Prefer custom element names, attributes and link paths over generated class names. Checked live on logged-out desktop pages on 2026-10-26.",
+  "version": 1,
+  "updated": "2026-10-26",
+  "inactive": ["ytd-watch-flexy[hidden]", "ytd-browse[hidden]", "ytd-search[hidden]", "ytd-shorts[hidden]"],
+  "homeMessage": "ytd-browse[page-subtype='home'] ytd-two-column-browse-results-renderer > #primary",
+  "rules": {
+    "shorts": {
+      "hide": [
+        "ytd-guide-entry-renderer:has(a#endpoint[title='Shorts'])",
+        "ytd-mini-guide-entry-renderer[aria-label='Shorts']",
+        "ytd-mini-guide-entry-renderer:has(a[title='Shorts'])",
+        "ytd-reel-shelf-renderer",
+        "ytd-rich-shelf-renderer[is-shorts]",
+        "ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts])",
+        "ytd-rich-section-renderer:has(ytm-shorts-lockup-view-model)",
+        "ytd-rich-section-renderer:has(ytm-shorts-lockup-view-model-v2)",
+        "grid-shelf-view-model:has(ytm-shorts-lockup-view-model)",
+        "grid-shelf-view-model:has(ytm-shorts-lockup-view-model-v2)",
+        "ytm-shorts-lockup-view-model-v2",
+        "ytm-shorts-lockup-view-model",
+        "ytd-rich-item-renderer:has(a[href^='/shorts/'])",
+        "ytd-video-renderer:has(a[href^='/shorts/'])",
+        "ytd-grid-video-renderer:has(a[href^='/shorts/'])",
+        "yt-lockup-view-model:has(a[href^='/shorts/'])",
+        "yt-tab-shape[tab-title='Shorts']"
+      ],
+      "probes": [
+        {
+          "page": "home",
+          "when": "ytd-guide-renderer ytd-guide-entry-renderer, ytd-mini-guide-renderer ytd-mini-guide-entry-renderer",
+          "selector": "ytd-guide-entry-renderer a#endpoint[title='Shorts'], ytd-mini-guide-entry-renderer[aria-label='Shorts']"
+        }
+      ]
+    },
+    "homeFeed": {
+      "hide": [
+        "ytd-browse[page-subtype='home'] ytd-rich-grid-renderer",
+        "ytd-browse[page-subtype='home'] ytd-feed-filter-chip-bar-renderer",
+        "ytd-browse[page-subtype='home'] #chips-wrapper"
+      ],
+      "probes": [{ "page": "home", "selector": "ytd-browse[page-subtype='home'] ytd-rich-grid-renderer" }]
+    },
+    "related": {
+      "hide": ["ytd-watch-flexy #related", "ytd-watch-next-secondary-results-renderer"],
+      "probes": [{ "page": "watch", "selector": "ytd-watch-flexy #related, ytd-watch-next-secondary-results-renderer" }]
+    },
+    "endscreen": {
+      "hide": [
+        ".html5-video-player .ytp-ce-element",
+        ".html5-video-player .html5-endscreen",
+        ".html5-video-player .videowall-endscreen",
+        ".html5-video-player .ytp-endscreen-content",
+        ".html5-video-player .ytp-fullscreen-grid",
+        ".html5-video-player .ytp-pause-overlay",
+        ".html5-video-player .ytp-cards-teaser",
+        ".html5-video-player .ytp-cards-button"
+      ],
+      "probes": [
+        {
+          "page": "watch",
+          "when": ".html5-video-player",
+          "selector": ".html5-video-player .html5-endscreen, .html5-video-player .ytp-endscreen-content, .html5-video-player .ytp-fullscreen-grid"
+        }
+      ]
+    },
+    "autoplayOff": {
+      "click": ".ytp-autonav-toggle-button[aria-checked='true']",
+      "probes": [{ "page": "watch", "when": ".html5-video-player .ytp-chrome-controls", "selector": ".ytp-autonav-toggle-button" }]
+    },
+    "comments": {
+      "hide": [
+        "ytd-watch-flexy #comments",
+        "ytd-comments#comments",
+        "ytd-engagement-panel-section-list-renderer[target-id='engagement-panel-comments-section']"
+      ],
+      "probes": [{ "page": "watch", "selector": "ytd-comments#comments" }]
+    },
+    "liveChat": {
+      "hide": ["ytd-watch-flexy #chat-container", "ytd-watch-flexy #chat", "ytd-live-chat-frame"]
+    },
+    "explore": {
+      "hide": [
+        "ytd-guide-section-renderer:has(a[href='/gaming'])",
+        "ytd-guide-section-renderer:has(a[href^='/feed/trending'])",
+        "ytd-guide-section-renderer:has(a[href^='/feed/explore'])",
+        "ytd-guide-entry-renderer:has(a[href^='/feed/trending'])",
+        "ytd-guide-entry-renderer:has(a[href^='/feed/explore'])",
+        "ytd-mini-guide-entry-renderer:has(a[href^='/feed/trending'])",
+        "ytd-mini-guide-entry-renderer:has(a[href^='/feed/explore'])"
+      ],
+      "probes": [
+        {
+          "page": "home",
+          "when": "ytd-guide-renderer ytd-guide-entry-renderer",
+          "selector": "ytd-guide-renderer a[href='/gaming'], ytd-guide-renderer a[href^='/feed/trending'], ytd-guide-renderer a[href^='/feed/explore']"
+        }
+      ]
+    },
+    "playables": {
+      "hide": [
+        "ytd-guide-entry-renderer:has(a[href^='/playables'])",
+        "ytd-mini-guide-entry-renderer:has(a[href^='/playables'])",
+        "ytd-rich-section-renderer:has(a[href^='/playables'])",
+        "ytd-rich-item-renderer:has(a[href^='/playables'])",
+        "grid-shelf-view-model:has(a[href^='/playables'])",
+        "yt-lockup-view-model:has(a[href^='/playables'])"
+      ],
+      "probes": [
+        {
+          "page": "home",
+          "when": "ytd-guide-renderer ytd-guide-entry-renderer",
+          "selector": "ytd-guide-entry-renderer a[href^='/playables']"
+        }
+      ]
+    },
+    "ads": {
+      "hide": [
+        "ytd-ad-slot-renderer",
+        "ytd-in-feed-ad-layout-renderer",
+        "ytd-rich-item-renderer:has(ytd-ad-slot-renderer)",
+        "ytd-search-pyv-renderer",
+        "ytd-promoted-sparkles-web-renderer",
+        "ytd-promoted-video-renderer",
+        "ytd-banner-promo-renderer",
+        "ytd-statement-banner-renderer",
+        "ytd-primetime-promo-renderer",
+        "ytd-brand-video-singleton-renderer",
+        "ytd-brand-video-shelf-renderer",
+        "ytd-companion-slot-renderer",
+        "ytd-merch-shelf-renderer",
+        "ytd-engagement-panel-section-list-renderer[target-id='engagement-panel-ads']",
+        "#masthead-ad",
+        "ytd-watch-flexy #player-ads"
+      ]
+    }
+  }
+}
