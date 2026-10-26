@@ -1,7 +1,7 @@
 # Chrome Web Store — Privacy practices & review notes (Video Declutter / «Видео без мусора»)
 
 Copy each block into the matching field of the CWS developer dashboard.
-`BASE` = the brand site address from `extension/lib/brand.js` (currently the placeholder `https://USER.github.io/REPO/` — replace it before submitting).
+`BASE` = the brand site address from `extension/lib/brand.js` (currently `https://ddvdvt.github.io/`).
 
 ## Single purpose
 
@@ -35,7 +35,7 @@ Certifications (all three checked):
 
 ## Privacy policy URL
 
-`BASE` + `privacy/youtube-clean.html` → currently `https://USER.github.io/REPO/privacy/youtube-clean.html`
+`BASE` + `privacy/youtube-clean.html` → `https://ddvdvt.github.io/privacy/youtube-clean.html`
 
 ## Notes for the reviewer (test instructions)
 

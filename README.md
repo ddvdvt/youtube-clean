@@ -85,7 +85,7 @@ npm run rules:verify    # проверить подписанный файл в�
 
 ## Страницы на сайте автора
 
-После установки открывается вкладка `BASE/welcome/youtube-clean.html`, после удаления — `BASE/bye/youtube-clean.html`, ссылка «Другие расширения автора» ведёт на `BASE/#youtube-clean`, `homepage_url` — на `BASE`, правила для обновления — `BASE/rules/youtube-clean/selectors.signed.json`. Адрес `BASE` задан в одном месте: [`extension/lib/brand.js`](extension/lib/brand.js) (сейчас заглушка `https://USER.github.io/REPO/`). `npm test` проверяет, что `homepage_url` в манифесте совпадает с ним.
+После установки открывается вкладка `BASE/welcome/youtube-clean.html`, после удаления — `BASE/bye/youtube-clean.html`, ссылка «Другие расширения автора» ведёт на `BASE/#youtube-clean`, `homepage_url` — на `BASE`, правила для обновления — `BASE/rules/youtube-clean/selectors.signed.json`. Адрес `BASE` задан в одном месте: [`extension/lib/brand.js`](extension/lib/brand.js) (сейчас `https://ddvdvt.github.io/`). `npm test` проверяет, что `homepage_url` в манифесте совпадает с ним.
 
 ## Что проверено
 

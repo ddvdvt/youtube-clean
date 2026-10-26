@@ -9,7 +9,7 @@
 // The optional rules update downloads BASE/rules/youtube-clean/selectors.signed.json.
 
 /** Base URL of the brand site, with a trailing slash. */
-export const BASE = 'https://USER.github.io/REPO/';
+export const BASE = 'https://ddvdvt.github.io/';
 
 /** Page slug of this extension on the brand site. */
 export const SLUG = 'youtube-clean';
